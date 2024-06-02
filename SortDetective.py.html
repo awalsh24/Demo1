@@ -1,0 +1,198 @@
+<html>
+<head>
+<title>SortDetective.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SortDetective.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">random</span>
+<span class="s0">import </span><span class="s1">time</span>
+
+<span class="s0">class </span><span class="s1">MergeSort</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">array</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array </span><span class="s2">= </span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">_merge_sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">)</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">_merge_sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">array</span><span class="s2">):</span>
+        <span class="s0">if </span><span class="s1">len</span><span class="s2">(</span><span class="s1">array</span><span class="s2">) &lt;= </span><span class="s3">1</span><span class="s2">:</span>
+            <span class="s0">return </span><span class="s1">array</span>
+
+        <span class="s1">mid </span><span class="s2">= </span><span class="s1">len</span><span class="s2">(</span><span class="s1">array</span><span class="s2">) // </span><span class="s3">2</span>
+        <span class="s1">left_half </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">_merge_sort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">[:</span><span class="s1">mid</span><span class="s2">])</span>
+        <span class="s1">right_half </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">_merge_sort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">[</span><span class="s1">mid</span><span class="s2">:])</span>
+
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">_merge</span><span class="s2">(</span><span class="s1">left_half</span><span class="s2">, </span><span class="s1">right_half</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">_merge</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">left</span><span class="s2">, </span><span class="s1">right</span><span class="s2">):</span>
+        <span class="s1">sorted_array </span><span class="s2">= []</span>
+        <span class="s1">i </span><span class="s2">= </span><span class="s1">j </span><span class="s2">= </span><span class="s3">0</span>
+
+        <span class="s0">while </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">len</span><span class="s2">(</span><span class="s1">left</span><span class="s2">) </span><span class="s0">and </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">len</span><span class="s2">(</span><span class="s1">right</span><span class="s2">):</span>
+            <span class="s0">if </span><span class="s1">left</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] &lt; </span><span class="s1">right</span><span class="s2">[</span><span class="s1">j</span><span class="s2">]:</span>
+                <span class="s1">sorted_array</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">left</span><span class="s2">[</span><span class="s1">i</span><span class="s2">])</span>
+                <span class="s1">i </span><span class="s2">+= </span><span class="s3">1</span>
+            <span class="s0">else</span><span class="s2">:</span>
+                <span class="s1">sorted_array</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">right</span><span class="s2">[</span><span class="s1">j</span><span class="s2">])</span>
+                <span class="s1">j </span><span class="s2">+= </span><span class="s3">1</span>
+
+        <span class="s1">sorted_array</span><span class="s2">.</span><span class="s1">extend</span><span class="s2">(</span><span class="s1">left</span><span class="s2">[</span><span class="s1">i</span><span class="s2">:])</span>
+        <span class="s1">sorted_array</span><span class="s2">.</span><span class="s1">extend</span><span class="s2">(</span><span class="s1">right</span><span class="s2">[</span><span class="s1">j</span><span class="s2">:])</span>
+
+        <span class="s0">return </span><span class="s1">sorted_array</span>
+
+<span class="s0">class </span><span class="s1">BubbleSort</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">array</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array </span><span class="s2">= </span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">n </span><span class="s2">= </span><span class="s1">len</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s1">n</span><span class="s2">):</span>
+            <span class="s1">swapped </span><span class="s2">= </span><span class="s0">False</span>
+            <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s3">0</span><span class="s2">, </span><span class="s1">n </span><span class="s2">- </span><span class="s1">i </span><span class="s2">- </span><span class="s3">1</span><span class="s2">):</span>
+                <span class="s0">if </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] &gt; </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">]:</span>
+                    <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">] = </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">]</span>
+                    <span class="s1">swapped </span><span class="s2">= </span><span class="s0">True</span>
+            <span class="s0">if not </span><span class="s1">swapped</span><span class="s2">:</span>
+                <span class="s0">break</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span>
+
+<span class="s0">class </span><span class="s1">InsertionSort</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">array</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array </span><span class="s2">= </span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s3">1</span><span class="s2">, </span><span class="s1">len</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">)):</span>
+            <span class="s1">key </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]</span>
+            <span class="s1">j </span><span class="s2">= </span><span class="s1">i </span><span class="s2">- </span><span class="s3">1</span>
+            <span class="s0">while </span><span class="s1">j </span><span class="s2">&gt;= </span><span class="s3">0 </span><span class="s0">and </span><span class="s1">key </span><span class="s2">&lt; </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">]:</span>
+                <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">] = </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">]</span>
+                <span class="s1">j </span><span class="s2">-= </span><span class="s3">1</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">] = </span><span class="s1">key</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span>
+
+<span class="s0">class </span><span class="s1">SelectionSort</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">array</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array </span><span class="s2">= </span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">n </span><span class="s2">= </span><span class="s1">len</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s1">n</span><span class="s2">):</span>
+            <span class="s1">min_idx </span><span class="s2">= </span><span class="s1">i</span>
+            <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">, </span><span class="s1">n</span><span class="s2">):</span>
+                <span class="s0">if </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] &lt; </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">min_idx</span><span class="s2">]:</span>
+                    <span class="s1">min_idx </span><span class="s2">= </span><span class="s1">j</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">min_idx</span><span class="s2">] = </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">min_idx</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span>
+
+<span class="s0">class </span><span class="s1">QuickSort</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">array</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array </span><span class="s2">= </span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">_quick_sort</span><span class="s2">(</span><span class="s3">0</span><span class="s2">, </span><span class="s1">len</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">) - </span><span class="s3">1</span><span class="s2">)</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">_quick_sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">low</span><span class="s2">, </span><span class="s1">high</span><span class="s2">):</span>
+        <span class="s0">if </span><span class="s1">low </span><span class="s2">&lt; </span><span class="s1">high</span><span class="s2">:</span>
+            <span class="s1">pi </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">_partition</span><span class="s2">(</span><span class="s1">low</span><span class="s2">, </span><span class="s1">high</span><span class="s2">)</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">_quick_sort</span><span class="s2">(</span><span class="s1">low</span><span class="s2">, </span><span class="s1">pi </span><span class="s2">- </span><span class="s3">1</span><span class="s2">)</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">_quick_sort</span><span class="s2">(</span><span class="s1">pi </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">, </span><span class="s1">high</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">_partition</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">low</span><span class="s2">, </span><span class="s1">high</span><span class="s2">):</span>
+        <span class="s1">pivot </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">high</span><span class="s2">]</span>
+        <span class="s1">i </span><span class="s2">= </span><span class="s1">low </span><span class="s2">- </span><span class="s3">1</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s1">low</span><span class="s2">, </span><span class="s1">high</span><span class="s2">):</span>
+            <span class="s0">if </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] &lt; </span><span class="s1">pivot</span><span class="s2">:</span>
+                <span class="s1">i </span><span class="s2">+= </span><span class="s3">1</span>
+                <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">j</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">high</span><span class="s2">] = </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">high</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">]</span>
+        <span class="s0">return </span><span class="s1">i </span><span class="s2">+ </span><span class="s3">1</span>
+
+<span class="s0">class </span><span class="s1">HeapSort</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">array</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">array </span><span class="s2">= </span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">sort</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">n </span><span class="s2">= </span><span class="s1">len</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s1">n </span><span class="s2">// </span><span class="s3">2 </span><span class="s2">- </span><span class="s3">1</span><span class="s2">, -</span><span class="s3">1</span><span class="s2">, -</span><span class="s3">1</span><span class="s2">):</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">_heapify</span><span class="s2">(</span><span class="s1">n</span><span class="s2">, </span><span class="s1">i</span><span class="s2">)</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s1">n </span><span class="s2">- </span><span class="s3">1</span><span class="s2">, </span><span class="s3">0</span><span class="s2">, -</span><span class="s3">1</span><span class="s2">):</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s3">0</span><span class="s2">] = </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s3">0</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">_heapify</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s3">0</span><span class="s2">)</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span>
+
+    <span class="s0">def </span><span class="s1">_heapify</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">n</span><span class="s2">, </span><span class="s1">i</span><span class="s2">):</span>
+        <span class="s1">largest </span><span class="s2">= </span><span class="s1">i</span>
+        <span class="s1">left </span><span class="s2">= </span><span class="s3">2 </span><span class="s2">* </span><span class="s1">i </span><span class="s2">+ </span><span class="s3">1</span>
+        <span class="s1">right </span><span class="s2">= </span><span class="s3">2 </span><span class="s2">* </span><span class="s1">i </span><span class="s2">+ </span><span class="s3">2</span>
+        <span class="s0">if </span><span class="s1">left </span><span class="s2">&lt; </span><span class="s1">n </span><span class="s0">and </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] &lt; </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">left</span><span class="s2">]:</span>
+            <span class="s1">largest </span><span class="s2">= </span><span class="s1">left</span>
+        <span class="s0">if </span><span class="s1">right </span><span class="s2">&lt; </span><span class="s1">n </span><span class="s0">and </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">largest</span><span class="s2">] &lt; </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">right</span><span class="s2">]:</span>
+            <span class="s1">largest </span><span class="s2">= </span><span class="s1">right</span>
+        <span class="s0">if </span><span class="s1">largest </span><span class="s2">!= </span><span class="s1">i</span><span class="s2">:</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">largest</span><span class="s2">] = </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">largest</span><span class="s2">], </span><span class="s1">self</span><span class="s2">.</span><span class="s1">array</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]</span>
+            <span class="s1">self</span><span class="s2">.</span><span class="s1">_heapify</span><span class="s2">(</span><span class="s1">n</span><span class="s2">, </span><span class="s1">largest</span><span class="s2">)</span>
+
+<span class="s0">if </span><span class="s1">__name__ </span><span class="s2">== </span><span class="s4">&quot;__main__&quot;</span><span class="s2">:</span>
+    <span class="s1">size </span><span class="s2">= </span><span class="s1">int</span><span class="s2">(</span><span class="s1">input</span><span class="s2">(</span><span class="s4">&quot;Enter the size of the array: &quot;</span><span class="s2">))</span>
+    <span class="s1">order </span><span class="s2">= </span><span class="s1">input</span><span class="s2">(</span><span class="s4">&quot;Enter the order of the array (ordered, reversed, random): &quot;</span><span class="s2">)</span>
+
+    <span class="s0">if </span><span class="s1">order </span><span class="s2">== </span><span class="s4">&quot;ordered&quot;</span><span class="s2">:</span>
+        <span class="s1">array </span><span class="s2">= </span><span class="s1">list</span><span class="s2">(</span><span class="s1">range</span><span class="s2">(</span><span class="s1">size</span><span class="s2">))</span>
+    <span class="s0">elif </span><span class="s1">order </span><span class="s2">== </span><span class="s4">&quot;reversed&quot;</span><span class="s2">:</span>
+        <span class="s1">array </span><span class="s2">= </span><span class="s1">list</span><span class="s2">(</span><span class="s1">range</span><span class="s2">(</span><span class="s1">size</span><span class="s2">, </span><span class="s3">0</span><span class="s2">, -</span><span class="s3">1</span><span class="s2">))</span>
+    <span class="s0">elif </span><span class="s1">order </span><span class="s2">== </span><span class="s4">&quot;random&quot;</span><span class="s2">:</span>
+        <span class="s1">array </span><span class="s2">= [</span><span class="s1">random</span><span class="s2">.</span><span class="s1">randint</span><span class="s2">(</span><span class="s3">1</span><span class="s2">, </span><span class="s1">size</span><span class="s2">) </span><span class="s0">for </span><span class="s1">_ </span><span class="s0">in </span><span class="s1">range</span><span class="s2">(</span><span class="s1">size</span><span class="s2">)]</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Invalid order specified.&quot;</span><span class="s2">)</span>
+        <span class="s1">exit</span><span class="s2">()</span>
+
+    <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Array:&quot;</span><span class="s2">, </span><span class="s1">array</span><span class="s2">)</span>
+
+    <span class="s1">guess </span><span class="s2">= </span><span class="s1">input</span><span class="s2">(</span><span class="s4">&quot;Which sorting algorithm do you think will be most efficient? (bubble, insertion, selection, quick, heap, merge): &quot;</span><span class="s2">)</span>
+
+    <span class="s1">algorithms </span><span class="s2">= {</span>
+        <span class="s4">&quot;bubble&quot;</span><span class="s2">: </span><span class="s1">BubbleSort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">()),</span>
+        <span class="s4">&quot;insertion&quot;</span><span class="s2">: </span><span class="s1">InsertionSort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">()),</span>
+        <span class="s4">&quot;selection&quot;</span><span class="s2">: </span><span class="s1">SelectionSort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">()),</span>
+        <span class="s4">&quot;quick&quot;</span><span class="s2">: </span><span class="s1">QuickSort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">()),</span>
+        <span class="s4">&quot;heap&quot;</span><span class="s2">: </span><span class="s1">HeapSort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">()),</span>
+        <span class="s4">&quot;merge&quot;</span><span class="s2">: </span><span class="s1">MergeSort</span><span class="s2">(</span><span class="s1">array</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">())</span>
+    <span class="s2">}</span>
+
+    <span class="s1">best_algo </span><span class="s2">= {</span>
+        <span class="s4">&quot;ordered&quot;</span><span class="s2">: </span><span class="s4">&quot;insertion&quot;</span><span class="s2">,</span>
+        <span class="s4">&quot;reversed&quot;</span><span class="s2">: </span><span class="s4">&quot;quick&quot;</span><span class="s2">,</span>
+        <span class="s4">&quot;random&quot;</span><span class="s2">: </span><span class="s4">&quot;quick&quot;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">start_time </span><span class="s2">= </span><span class="s1">time</span><span class="s2">.</span><span class="s1">time</span><span class="s2">()</span>
+    <span class="s0">if </span><span class="s1">guess </span><span class="s0">in </span><span class="s1">algorithms</span><span class="s2">:</span>
+        <span class="s1">sorted_array </span><span class="s2">= </span><span class="s1">algorithms</span><span class="s2">[</span><span class="s1">guess</span><span class="s2">].</span><span class="s1">sort</span><span class="s2">()</span>
+        <span class="s1">elapsed_time </span><span class="s2">= </span><span class="s1">time</span><span class="s2">.</span><span class="s1">time</span><span class="s2">() - </span><span class="s1">start_time</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">f&quot;Sorted array using </span><span class="s0">{</span><span class="s1">guess</span><span class="s0">} </span><span class="s4">sort:&quot;</span><span class="s2">, </span><span class="s1">sorted_array</span><span class="s2">)</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">f&quot;Time taken: </span><span class="s0">{</span><span class="s1">elapsed_time</span><span class="s0">:</span><span class="s4">.6f</span><span class="s0">} </span><span class="s4">seconds&quot;</span><span class="s2">)</span>
+        <span class="s0">if </span><span class="s1">guess </span><span class="s2">== </span><span class="s1">best_algo</span><span class="s2">[</span><span class="s1">order</span><span class="s2">]:</span>
+            <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Your guess was correct! This is generally the most efficient sort for this scenario.&quot;</span><span class="s2">)</span>
+        <span class="s0">else</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Your guess was not the best choice for this scenario.&quot;</span><span class="s2">)</span>
+            <span class="s1">print</span><span class="s2">(</span><span class="s4">f&quot;For an </span><span class="s0">{</span><span class="s1">order</span><span class="s0">} </span><span class="s4">array, </span><span class="s0">{</span><span class="s1">best_algo</span><span class="s2">[</span><span class="s1">order</span><span class="s2">]</span><span class="s0">} </span><span class="s4">sort is typically more efficient.&quot;</span><span class="s2">)</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Invalid sorting algorithm specified.&quot;</span><span class="s2">)</span>
+        <span class="s1">exit</span><span class="s2">()</span></pre>
+</body>
+</html>
